@@ -32,7 +32,7 @@ export 'src/core/base.dart' show Paths;
 export 'src/core/base.dart' show ThemeGenerator;
 
 /// 当前包版本号。
-const String genFlexThemeVersion = '1.0.6';
+const String genFlexThemeVersion = '1.0.7';
 
 /// 打印工具信息 Banner。
 void printGenFlexThemeBanner() {

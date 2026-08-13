@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.7
+- 🔗 Changed the Chinese documentation link to an external GitHub URL for pub.dev compatibility.
+
 ## 1.0.6
 - 📝 Added comprehensive Chinese documentation and corrected usage examples.
 - 🔗 Fixed documentation links and synchronized package version metadata.

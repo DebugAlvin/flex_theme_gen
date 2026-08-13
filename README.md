@@ -1,6 +1,6 @@
 # 🌈 Flutter Theme Generator
 
-Language: English | [中文文档 🇨🇳](README.zh.md)
+Language: English | [中文文档 🇨🇳](https://github.com/DebugAlvin/flex_theme_gen/blob/main/README.zh.md)
 
 ---
 
@@ -28,7 +28,7 @@ Add to your `dev_dependencies`:
 
 ```yaml
 dev_dependencies:
-  flex_theme_gen: ^1.0.6
+  flex_theme_gen: ^1.0.7
 ```
 
 Then activate globally (optional):

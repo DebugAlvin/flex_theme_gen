@@ -1,6 +1,6 @@
 name: flex_theme_gen
 description: Generate Flutter theme code from design tokens (YAML/JSON).
-version: 1.0.6
+version: 1.0.7
 repository: https://github.com/DebugAlvin/flex_theme_gen
 issue_tracker: https://github.com/DebugAlvin/flex_theme_gen/issues
 homepage: https://github.com/DebugAlvin/flex_theme_gen
