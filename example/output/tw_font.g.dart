@@ -1,0 +1,100 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ============================================================
+//  Tailwind-style font extensions for Text (dynamic per JSON)
+//  Source: {{ source }}
+//  Generated at: {{ generatedAt }}
+// ============================================================
+
+import 'package:flutter/material.dart';
+import 'fonts.g.dart'; // 引用 FontFamilies / FontPackages
+
+/// 为 Text 提供字体链式扩展：f<Key> / fBold / withStyle
+///
+/// 用法示例：
+/// Text('98 : 76')
+///   .fNumber            // 来自 JSON: fonts.number
+///   .fBold              // w700
+///   .withStyle(TextStyles.number_30B.copyWith(color: Colors.red));
+extension TwFontTextExtensions on Text {
+  Text _twCopyWith({
+    String? fontFamily,
+    String? package,     // 仅当显式传入时设置；否则完全不传（避免读 s.package）
+    FontWeight? fontWeight,
+    Color? color,
+    double? fontSize,
+    double? height,
+    double? letterSpacing,
+    FontStyle? fontStyle,
+    List<FontFeature>? fontFeatures,
+  }) {
+    final s = (style ?? const TextStyle());
+
+    // ⚠️ 不能访问 s.package：某些 SDK/分析器不暴露 getter
+    final TextStyle next = (package != null)
+        ? s.copyWith(
+            fontFamily: fontFamily ?? s.fontFamily,
+            package: package, // 仅在显式传入时写入
+            fontWeight: fontWeight ?? s.fontWeight,
+            color: color ?? s.color,
+            fontSize: fontSize ?? s.fontSize,
+            height: height ?? s.height,
+            letterSpacing: letterSpacing ?? s.letterSpacing,
+            fontStyle: fontStyle ?? s.fontStyle,
+            fontFeatures: fontFeatures ?? s.fontFeatures,
+          )
+        : s.copyWith(
+            fontFamily: fontFamily ?? s.fontFamily,
+            // 不传 package 参数 -> 保持原有 package（由上游 style 内部维持）
+            fontWeight: fontWeight ?? s.fontWeight,
+            color: color ?? s.color,
+            fontSize: fontSize ?? s.fontSize,
+            height: height ?? s.height,
+            letterSpacing: letterSpacing ?? s.letterSpacing,
+            fontStyle: fontStyle ?? s.fontStyle,
+            fontFeatures: fontFeatures ?? s.fontFeatures,
+          );
+
+    return Text(
+      data ?? '',
+      key: key,
+      style: next,
+      textAlign: textAlign,
+      textDirection: textDirection,
+      locale: locale,
+      softWrap: softWrap,
+      overflow: overflow,
+      textScaler: textScaler,
+      maxLines: maxLines,
+      semanticsLabel: semanticsLabel,
+      strutStyle: strutStyle,
+      textWidthBasis: textWidthBasis,
+      textHeightBehavior: textHeightBehavior,
+      selectionColor: selectionColor,
+    );
+  }
+
+  /// 加粗（w700）
+  Text get fBold => _twCopyWith(fontWeight: FontWeight.w700);
+
+  /// 安全替代 TextStyle.copyWith（Text 本身没有 copyWith）
+  /// 仅拷贝常见可读字段；不处理 package（由 fXxx 负责设置）
+  Text withStyle(TextStyle style) => _twCopyWith(
+        fontFamily: style.fontFamily,
+        fontWeight: style.fontWeight,
+        color: style.color,
+        fontSize: style.fontSize,
+        height: style.height,
+        letterSpacing: style.letterSpacing,
+        fontStyle: style.fontStyle,
+        fontFeatures: style.fontFeatures,
+      );
+
+  /// 字体（来自 JSON: fonts.english）
+  Text get fEnglish => _twCopyWith(fontFamily: FontFamilies.english, package: FontPackages.english);
+
+  /// 字体（来自 JSON: fonts.normal）
+  Text get fNormal => _twCopyWith(fontFamily: FontFamilies.normal, package: FontPackages.normal);
+
+  /// 字体（来自 JSON: fonts.number）
+  Text get fNumber => _twCopyWith(fontFamily: FontFamilies.number, package: FontPackages.number);
+}

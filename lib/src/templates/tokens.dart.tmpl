@@ -1,0 +1,52 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ============================================================
+//  Design Tokens → Flutter constants
+//  Source: {{ source }}
+//  Generated at: {{ generatedAt }}
+// ============================================================
+
+import 'package:flutter/material.dart';
+
+/// 全局 Design Tokens（间距 / 圆角 / 阴影等）
+///
+/// ⚙️ 本文件由脚本自动生成，请勿手动修改。
+///
+/// 示例：
+/// ```dart
+/// padding: EdgeInsets.all(Tokens.spacingMd),
+/// borderRadius: BorderRadius.circular(Tokens.radiusLg),
+/// ```
+class Tokens {
+  // ============================================================
+  // 🧩 Spacing Tokens
+  // ============================================================
+{{spacingTokens}}
+
+  // ============================================================
+  // 🟢 Radius Tokens
+  // ============================================================
+{{radiusTokens}}
+
+  // ============================================================
+  // 🌫 Shadow Tokens（可选）
+  // ============================================================
+{{shadowTokens}}
+
+  // ============================================================
+  // 🟢 Border Tokens
+  // ============================================================
+{{borderTokens}}
+
+  // ============================================================
+  // 🎨 Opacity / Blur / Misc Tokens（可选）
+  // ============================================================
+{{miscTokens}}
+
+  // ---------------- Border Defaults ----------------
+  /// 默认边框宽度（可被链式方法 {{prefix}}Border 的 `width` 覆盖）
+  static const double borderDefaultWidth = {{borderDefaultWidth}};
+
+  /// 默认边框颜色所引用的 AppColors token 名（可为空字符串）
+  /// - 非空时，链式扩展优先使用 `colors.<token>`，否则回退到 `borderDefaultColor`
+  static const String borderDefaultColorToken = '{{borderDefaultColorToken}}';
+}

@@ -1,0 +1,21 @@
+# Dart and Flutter
+.dart_tool/
+.packages
+.pub/
+build/
+coverage/
+doc/api/
+
+# IDEs
+.idea/
+*.iml
+.vscode/
+
+# macOS
+.DS_Store
+
+# Flutter generated files
+**/ios/Flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/

@@ -1,0 +1,219 @@
+fontsPackage: res
+
+fonts:
+  number: InterRes
+  english: Roboto
+  normal: Noto Sans SC
+
+colors:
+  light:
+    colorFF33A9FF: FF33A9FF
+    colorFF091C3D: FF091C3D
+    colorFFB1DEFF: FFB1DEFF
+    colorFFE8F5FF: FFE8F5FF
+    colorFF98B0D9: FF98B0D9
+    colorFFC4D6E4: FFC4D6E4
+    colorFFE9EEF2: FFE9EEF2
+    colorFFF2F2F2: FFF2F2F2
+    colorFFCBCBCB: FFCBCBCB
+    colorFFFAFBFF_FF121212: FFFAFBFF
+    colorFFFFFFFF_FF31313D: FFFFFFFF
+    colorFFF1F1F1_FF272731: FFF1F1F1
+    colorFFD1D1D1_FF494959: FFD1D1D1
+    colorFFDFDFDF_FF27272F: FFDFDFDF
+    colorFFEDF8FF_FF4A5665: FFEDF8FF
+    colorFFE9EEF2_FF1E252B: FFE9EEF2
+    colorFF0060A9_FF93B7D3: FF0060A9
+    colorFFB2C6D7_FF344654: FFB2C6D7
+    colorFFFFFFFF: FFFFFFFF
+    colorFF000000: FF000000
+    colorB3FFFFFF: B3FFFFFF
+    color80000000: 80000000
+    colorFF1B1C23: FF1B1C23
+    colorFF453B54: FF453B54
+    color99000000: 99000000
+    colorFF2B2B2B_FFFFFFFF: FF2B2B2B
+    colorFF858585_FFCECECE: FF858585
+    colorFFB6B6B6_FF969696: FFB6B6B6
+    colorFFD1D1D1_FF3F3F3F: FFD1D1D1
+    colorFFC4D6E4_FF6D899F: FFC4D6E4
+    colorFFE5E5E5_FF3F3F3F: FFE5E5E5
+    colorFF33A9FF_FF005EA2: FF33A9FF
+    colorFF37AA4A: FF37AA4A
+    colorFFEF5A22: FFEF5A22
+    colorFF939393: FF939393
+    colorFFF9BC1E: FFF9BC1E
+    colorFFFF1568: FFFF1568
+    colorFFF86C06: FFF86C06
+    colorFFFF2B2B: FFFF2B2B
+    colorFF02DDA3: FF02DDA3
+    colorFF1E92FF: FF1E92FF
+    colorFF000BA5: FF000BA5
+    colorFFEA4335: FFEA4335
+    appBarGradient:
+      type: linear
+      colors: ["#353842", "#181C29"]
+      begin: topCenter
+      end: bottomCenter
+    colorFF000000FFFFFFFF: "#FFFFFFFF"
+    electronicGameCategorySelectGradient:
+      type: linear
+      colors: ["#091C3D", "#154598"]
+      begin: topCenter
+      end: bottomCenter
+    electronicGameCategoryUnselectGradient:
+      type: linear
+      colors: ["#F1F1F1", "#FFFFFF"]
+      begin: topCenter
+      end: bottomCenter
+
+  dark:
+    colorFF33A9FF: FF33A9FF
+    colorFF091C3D: FF091C3D
+    colorFFB1DEFF: FFB1DEFF
+    colorFFE8F5FF: FFE8F5FF
+    colorFF98B0D9: FF98B0D9
+    colorFFC4D6E4: FFC4D6E4
+    colorFFE9EEF2: FFE9EEF2
+    colorFFF2F2F2: FFF2F2F2
+    colorFFCBCBCB: FFCBCBCB
+    colorFFFAFBFF_FF121212: FF121212
+    colorFFFFFFFF_FF31313D: FF31313D
+    colorFFF1F1F1_FF272731: FF272731
+    colorFFD1D1D1_FF494959: FF494959
+    colorFFDFDFDF_FF27272F: FF27272F
+    colorFFEDF8FF_FF4A5665: FF4A5665
+    colorFFE9EEF2_FF1E252B: FF1E252B
+    colorFF0060A9_FF93B7D3: FF93B7D3
+    colorFFB2C6D7_FF344654: FF344654
+    colorFFFFFFFF: FFFFFFFF
+    colorFF000000: FFFFFFFF
+    colorB3FFFFFF: B3FFFFFF
+    color80000000: 80000000
+    colorFF1B1C23: FF1B1C23
+    colorFF453B54: FF453B54
+    color99000000: 99000000
+    colorFF2B2B2B_FFFFFFFF: FFFFFFFF
+    colorFF858585_FFCECECE: FFCECECE
+    colorFFB6B6B6_FF969696: FF969696
+    colorFFD1D1D1_FF3F3F3F: FF3F3F3F
+    colorFFC4D6E4_FF6D899F: FF6D899F
+    colorFFE5E5E5_FF3F3F3F: FF3F3F3F
+    colorFF33A9FF_FF005EA2: FF005EA2
+    colorFF37AA4A: FF37AA4A
+    colorFFEF5A22: FFEF5A22
+    colorFF939393: FF939393
+    colorFFF9BC1E: FFF9BC1E
+    colorFFFF1568: FFFF1568
+    colorFFF86C06: FFF86C06
+    colorFFFF2B2B: FFFF2B2B
+    colorFF02DDA3: FF02DDA3
+    colorFF1E92FF: FF1E92FF
+    colorFFEA4335: FFEA4335
+    appBarGradient:
+      type: linear
+      colors: ["#22242C", "#12151F"]
+      begin: topCenter
+      end: bottomCenter
+    colorFF000BA5: FF000BA5
+    colorFF000000FFFFFFFF: "#FF000000"
+    electronicGameCategorySelectGradient:
+      type: linear
+      colors: ["#091C3D", "#154598"]
+      begin: topCenter
+      end: bottomCenter
+    electronicGameCategoryUnselectGradient:
+      type: linear
+      colors: ["#F1F1F1", "#FFFFFF"]
+      begin: topCenter
+      end: bottomCenter
+
+tokens:
+  prefix: tw #链式扩展增加前缀
+  spacing:
+    2: 2
+    4: 4
+    6: 6
+    8: 8
+    10: 10
+    12: 12
+    16: 16
+    24: 24
+    32: 32
+  radius:
+    4: 4
+    8: 8
+    12: 12
+    16: 16
+    24: 24
+  shadow:
+    2: 2
+    8: 8
+    12: 12
+    16: 16
+    24: 24
+  misc:
+    blurSm: 2
+    blurMd: 6
+    opacityDisabled: 0.5
+  border:
+    default:
+      colorToken: "colorFF33A9FF" # ✅ 可选：引用到 AppColors 的 token（支持明暗）
+      width: 1 # 默认宽度
+    2: 2
+    4: 4
+    6: 6
+    8: 8
+
+typography:
+  number:
+    fontFamilyToken: number
+    sizes:
+      30R: { fontSize: 30, fontWeight: w400, lineHeight: 30 }
+      30B: { fontSize: 30, fontWeight: w700, lineHeight: 30 }
+      24R: { fontSize: 24, fontWeight: w400, lineHeight: 24 }
+      24B: { fontSize: 24, fontWeight: w700, lineHeight: 24 }
+      20R: { fontSize: 20, fontWeight: w400, lineHeight: 20 }
+      20B: { fontSize: 20, fontWeight: w700, lineHeight: 20 }
+      18R: { fontSize: 18, fontWeight: w400, lineHeight: 18 }
+      18B: { fontSize: 18, fontWeight: w700, lineHeight: 18 }
+      16R: { fontSize: 16, fontWeight: w400, lineHeight: 16 }
+      16B: { fontSize: 16, fontWeight: w700, lineHeight: 16 }
+      14R: { fontSize: 14, fontWeight: w400, lineHeight: 14 }
+      14B: { fontSize: 14, fontWeight: w700, lineHeight: 14 }
+      12R: { fontSize: 12, fontWeight: w400, lineHeight: 12 }
+      12B: { fontSize: 12, fontWeight: w700, lineHeight: 12 }
+
+  english:
+    fontFamilyToken: english
+    sizes:
+      H1_24R: { fontSize: 24, fontWeight: w400, lineHeight: 24 }
+      H1_24B: { fontSize: 24, fontWeight: w700, lineHeight: 24 }
+      H2_22R: { fontSize: 22, fontWeight: w400, lineHeight: 22 }
+      H2_22B: { fontSize: 22, fontWeight: w700, lineHeight: 22 }
+      H3_18R: { fontSize: 18, fontWeight: w400, lineHeight: 18 }
+      H3_18B: { fontSize: 18, fontWeight: w700, lineHeight: 18 }
+      H4_16R: { fontSize: 16, fontWeight: w400, lineHeight: 16 }
+      H4_16B: { fontSize: 16, fontWeight: w700, lineHeight: 16 }
+      P1_14R: { fontSize: 14, fontWeight: w400, lineHeight: 14 }
+      P1_14B: { fontSize: 14, fontWeight: w700, lineHeight: 14 }
+      P2_12R: { fontSize: 12, fontWeight: w400, lineHeight: 12 }
+      P2_12B: { fontSize: 12, fontWeight: w700, lineHeight: 12 }
+
+  normal:
+    fontFamilyToken: normal
+    sizes:
+      H1_R: { fontSize: 24, fontWeight: w400, lineHeight: 24 }
+      H1_B: { fontSize: 24, fontWeight: w700, lineHeight: 24 }
+      H2_R: { fontSize: 22, fontWeight: w400, lineHeight: 22 }
+      H2_B: { fontSize: 22, fontWeight: w700, lineHeight: 22 }
+      H3_R: { fontSize: 18, fontWeight: w400, lineHeight: 18 }
+      H3_B: { fontSize: 18, fontWeight: w700, lineHeight: 18 }
+      H4_R: { fontSize: 16, fontWeight: w400, lineHeight: 16 }
+      H4_B: { fontSize: 16, fontWeight: w700, lineHeight: 16 }
+      P1_R: { fontSize: 14, fontWeight: w400, lineHeight: 20 }
+      P1_B: { fontSize: 14, fontWeight: w700, lineHeight: 20 }
+      P2_R: { fontSize: 12, fontWeight: w400, lineHeight: 20 }
+      P2_B: { fontSize: 12, fontWeight: w700, lineHeight: 20 }
+      P3_R: { fontSize: 10, fontWeight: w400, lineHeight: 10 }
+      P3_B: { fontSize: 10, fontWeight: w700, lineHeight: 10 }

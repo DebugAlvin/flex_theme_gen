@@ -1,0 +1,110 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ============================================================
+//  Tailwind-style alias extension
+//  Source: {{ source }}
+//  Generated at: {{ generatedAt }}
+// ============================================================
+
+import 'package:flutter/material.dart';
+import 'tokens.g.dart';
+import 'app_colors.g.dart';
+
+extension {{prefix}}PaddingAliases on Widget {
+  /// padding: EdgeInsets.all(v)
+  Widget {{prefix}}P(double v) => Padding(padding: EdgeInsets.all(v), child: this);
+
+  /// x 方向 (horizontal)
+  Widget {{prefix}}PHx(double v) => Padding(padding: EdgeInsets.symmetric(horizontal: v), child: this);
+
+  /// y 方向 (vertical)
+  Widget {{prefix}}PVy(double v) => Padding(padding: EdgeInsets.symmetric(vertical: v), child: this);
+
+  {{#each spacing}}
+  /// padding: EdgeInsets.all(Tokens.spacing{{keyCap}})
+  Widget {{prefix}}P{{keyCap}}() => Padding(padding: EdgeInsets.all(Tokens.spacing{{keyCap}}), child: this);
+
+  /// x方向 padding
+  Widget {{prefix}}PHx{{keyCap}}() => Padding(padding: EdgeInsets.symmetric(horizontal: Tokens.spacing{{keyCap}}), child: this);
+
+  /// y方向 padding
+  Widget {{prefix}}PVy{{keyCap}}() => Padding(padding: EdgeInsets.symmetric(vertical: Tokens.spacing{{keyCap}}), child: this);
+  {{/each}}
+}
+
+extension {{prefix}}RoundAliases on Widget {
+  /// 背景色
+  Widget {{prefix}}Bg(Color color) => DecoratedBox(
+        decoration: BoxDecoration(color: color),
+        child: this,
+      );
+
+  /// 全圆角
+  Widget {{prefix}}RoundedFull() => ClipRRect(
+        borderRadius: BorderRadius.circular(9999),
+        child: this,
+      );
+
+  {{#each radius}}
+  /// 裁剪圆角 Tokens.radius{{keyCap}}
+  Widget {{prefix}}Rounded{{keyCap}}() => ClipRRect(
+        borderRadius: BorderRadius.circular(Tokens.radius{{keyCap}}),
+        child: this,
+      );
+
+  /// 非裁剪圆角 Tokens.radius{{keyCap}}
+  Widget {{prefix}}Radius{{keyCap}}() => DecoratedBox(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(Tokens.radius{{keyCap}})),
+        child: this,
+      );
+  {{/each}}
+
+  // ---------------- Border ----------------
+  /// 默认边框（使用 Tokens.borderDefaultWidth）
+  Widget {{prefix}}Border({Color? color, double? width, double? radius}) =>
+      _{{prefix}}BuildBorder(this, width ?? Tokens.borderDefaultWidth, color, radius);
+
+  {{#each border}}
+  /// 边框 Tokens.border{{keyCap}}
+  Widget {{prefix}}Border{{keyCap}}({Color? color, double? radius}) =>
+      _{{prefix}}BuildBorder(this, Tokens.border{{keyCap}}, color, radius);
+  {{/each}}
+
+ // ============================================================
+ //  辅助函数
+ // ============================================================
+
+ double _{{prefix}}DetectRadius(Widget widget) {
+   if (widget is ClipRRect) {
+     return widget.borderRadius is BorderRadius
+         ? (widget.borderRadius as BorderRadius).topLeft.x
+         : 0;
+   }
+   if (widget is DecoratedBox) {
+     final deco = widget.decoration;
+     if (deco is BoxDecoration && deco.borderRadius is BorderRadius) {
+       final br = deco.borderRadius as BorderRadius;
+       return br.topLeft.x;
+     }
+   }
+   return 0;
+ }
+
+ Widget _{{prefix}}BuildBorder(Widget child, double width, Color? color, double? radius) {
+   return Builder(
+     builder: (context) {
+       final isDark = Theme.of(context).brightness == Brightness.dark;
+       final colors = isDark ? AppColors.dark() : AppColors.light();
+       final Color resolvedColor = color ?? {{resolvedBorderColorExpr}};
+       final double effectiveRadius = radius ?? _{{prefix}}DetectRadius(child);
+
+       return DecoratedBox(
+         decoration: BoxDecoration(
+           border: Border.all(color: resolvedColor, width: width),
+           borderRadius: BorderRadius.circular(effectiveRadius),
+         ),
+         child: child,
+       );
+     },
+   );
+ }
+}
