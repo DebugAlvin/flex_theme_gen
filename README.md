@@ -28,7 +28,7 @@ Add to your `dev_dependencies`:
 
 ```yaml
 dev_dependencies:
-  flex_theme_gen: ^1.0.4
+  flex_theme_gen: ^1.0.6
 ```
 
 Then activate globally (optional):

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.6
+- 📝 Added comprehensive Chinese documentation and corrected usage examples.
+- 🔗 Fixed documentation links and synchronized package version metadata.
+
 ## 1.0.5
 - 📝 Updated README and English documentation.
 - ✨ Improved multilingual support structure for documentation.
