@@ -20,7 +20,7 @@
 
 ```yaml
 dev_dependencies:
-  flex_theme_gen: ^1.0.7
+  flex_theme_gen: ^1.0.8
 ```
 
 安装依赖：

@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.8
+- Removed generation timestamps from generated code comments to avoid unnecessary Git changes when regenerating unchanged tokens.
+
 ## 1.0.7
 - 🔗 Changed the Chinese documentation link to an external GitHub URL for pub.dev compatibility.
 

@@ -40,7 +40,6 @@ class ColorsGenerator implements ThemeGenerator {
     final tpl = paths.loadTpl('app_colors.dart.tmpl');;
     final rendered = renderTemplate(tpl, {
       'source': paths.inputPath,
-      'generatedAt': DateTime.now().toIso8601String(),
       'fields': fields.toString().trimRight(),
       'ctorParams': ctor.toString().trimRight(),
       'lightInits': initL.toString().trimRight(),

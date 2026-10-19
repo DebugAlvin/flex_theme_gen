@@ -72,7 +72,6 @@ class TokensGenerator implements ThemeGenerator {
     final tplTokens = paths.loadTpl('tokens.dart.tmpl');
     final renderedTokens = renderTemplate(tplTokens, {
       'source': paths.inputPath,
-      'generatedAt': DateTime.now().toIso8601String(),
       'prefix': prefix,
       'spacingTokens': _renderConst('spacing', spacing),
       'radiusTokens': _renderConst('radius', radius),
@@ -96,13 +95,12 @@ class TokensGenerator implements ThemeGenerator {
     // ============================================================
     final hasToken = borderColorToken != null && borderColorToken.isNotEmpty;
     final resolvedBorderColorExpr = hasToken
-        ? 'colors.${_safe(borderColorToken!)}'
+        ? 'colors.${_safe(borderColorToken)}'
         : 'const Color(${_toDartIntHexExpr(borderColorHex) ?? '0xFFCCCCCC'})';
 
     final tplAlias = paths.loadTpl('tw_alias.dart.tmpl');
     final renderedAlias = renderTemplate(tplAlias, {
       'source': paths.inputPath,
-      'generatedAt': DateTime.now().toIso8601String(),
       'prefix': prefix,
       'resolvedBorderColorExpr': resolvedBorderColorExpr,
       'spacing': spacing.keys.map((k) => {'keyCap': _cap(k)}).toList(),
@@ -113,7 +111,7 @@ class TokensGenerator implements ThemeGenerator {
     final outAlias = File(paths.joinOut(aliasFileName))
       ..createSync(recursive: true)
       ..writeAsStringSync(renderedAlias);
-    log('✅ 写入：${paths.joinOut(aliasFileName)}');
+    log('✅ 写入：${outAlias.path}');
   }
 
   // ============================================================

@@ -202,7 +202,6 @@ class TypographyGenerator implements ThemeGenerator {
     final tpl = paths.loadTpl('typography.dart.tmpl');
     final rendered = renderTemplate(tpl, {
       'source': paths.inputPath,
-      'generatedAt': DateTime.now().toIso8601String(),
       'styleStatics': styleStatics.toString().trimRight(),
     });
     File(paths.joinOut('typography.g.dart'))
@@ -214,7 +213,6 @@ class TypographyGenerator implements ThemeGenerator {
     final tplR = paths.loadTpl('typography_resolved.dart.tmpl');
     final renderedR = renderTemplate(tplR, {
       'source': paths.inputPath,
-      'generatedAt': DateTime.now().toIso8601String(),
       'resolvedMethods': resolvedMethods.toString().trimRight(),
     });
     File(paths.joinOut('typography_resolved.g.dart'))

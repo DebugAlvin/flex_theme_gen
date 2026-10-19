@@ -2,7 +2,6 @@
 // ============================================================
 //  Font families generated from design_tokens.json
 //  Source: {{ source }}
-//  Generated at: {{ generatedAt }}
 // ============================================================
 
 import 'package:flutter/material.dart';

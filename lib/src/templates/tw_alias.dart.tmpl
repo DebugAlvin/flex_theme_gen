@@ -2,7 +2,6 @@
 // ============================================================
 //  Tailwind-style alias extension
 //  Source: {{ source }}
-//  Generated at: {{ generatedAt }}
 // ============================================================
 
 import 'package:flutter/material.dart';

@@ -2,7 +2,6 @@
 // ============================================================
 //  Design Tokens → Flutter constants
 //  Source: {{ source }}
-//  Generated at: {{ generatedAt }}
 // ============================================================
 
 import 'package:flutter/material.dart';

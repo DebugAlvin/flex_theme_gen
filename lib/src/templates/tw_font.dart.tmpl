@@ -2,7 +2,6 @@
 // ============================================================
 //  Tailwind-style font extensions for Text (dynamic per JSON)
 //  Source: {{ source }}
-//  Generated at: {{ generatedAt }}
 // ============================================================
 
 import 'package:flutter/material.dart';

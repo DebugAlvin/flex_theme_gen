@@ -59,7 +59,6 @@ class FontsGenerator implements ThemeGenerator {
     final tplFonts = paths.loadTpl('fonts.dart.tmpl');
     final renderedFonts = renderTemplate(tplFonts, {
       'source': paths.inputPath,
-      'generatedAt': DateTime.now().toIso8601String(),
       'families': bufFamilies.toString().trimRight(),
       'packages': bufPackages.toString().trimRight(),
     });
@@ -102,7 +101,6 @@ class FontsGenerator implements ThemeGenerator {
     final tpl = paths.loadTpl('tw_font.dart.tmpl');
     final rendered = renderTemplate(tpl, {
       'source': paths.inputPath,
-      'generatedAt': DateTime.now().toIso8601String(),
       'fontGetters': buf.toString().trimRight(),
     });
 
