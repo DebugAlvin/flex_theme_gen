@@ -1,0 +1,5 @@
+name: legacy_fixture
+flutter_gen:
+  fonts:
+    outputs:
+      class_name: FontFamily

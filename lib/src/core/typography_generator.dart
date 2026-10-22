@@ -1,9 +1,13 @@
 import 'dart:io';
 import 'base.dart';
+import '../fonts/font_declarations.dart';
 import '../utils/template_utils.dart';
 import '../utils/color_utils.dart';
 
 class TypographyGenerator implements ThemeGenerator {
+  final FontDeclarations? declarations;
+  TypographyGenerator({this.declarations});
+
   @override
   String get id => 'typography';
 
@@ -17,7 +21,8 @@ class TypographyGenerator implements ThemeGenerator {
     }
 
     // 根级 fonts token 映射 & 外部包名（可为空）
-    final fonts = ((root['fonts'] as Map?) ?? const {}).cast<String, String>();
+    final catalog = declarations ?? FontDeclarations.load(root, paths, log);
+    final fonts = catalog.families;
     final rootFontsPackage = (root['fontsPackage'] as String?)?.trim();
     final hasRootExternal =
         rootFontsPackage != null && rootFontsPackage.isNotEmpty;
@@ -73,12 +78,11 @@ class TypographyGenerator implements ThemeGenerator {
           );
 
           // 2️⃣ family 解析
-          bool fromToken = false;
+          final fontToken = m['fontFamilyToken'] as String? ?? groupFontToken;
           final resolvedFamily = _resolveFontFamily(
             fonts,
-            m['fontFamilyToken'] as String? ?? groupFontToken,
+            fontToken,
             m['fontFamily'] as String? ?? groupFontFamily,
-            () => fromToken = true,
           );
           final famLiteral =
               resolvedFamily != null ? "'${_esc(resolvedFamily)}'" : null;
@@ -96,10 +100,10 @@ class TypographyGenerator implements ThemeGenerator {
           ];
           if (famLiteral != null) fields.add('fontFamily: $famLiteral');
 
-          if (fromToken &&
-              usedFontsPackage != null &&
+          if (usedFontsPackage != null &&
               usedFontsPackage.isNotEmpty &&
-              !_isSystemFont(resolvedFamily ?? '')) {
+              catalog.isBundled(resolvedFamily ?? '',
+                  token: fontToken?.trim())) {
             fields.add("package: '$usedFontsPackage'");
           }
 
@@ -150,12 +154,11 @@ class TypographyGenerator implements ThemeGenerator {
           fallback: 0.0,
         );
 
-        bool fromToken = false;
+        final fontToken = groupNode['fontFamilyToken'] as String?;
         final resolvedFamily = _resolveFontFamily(
           fonts,
-          groupNode['fontFamilyToken'] as String?,
+          fontToken,
           groupNode['fontFamily'] as String?,
-          () => fromToken = true,
         );
         final famLiteral =
             resolvedFamily != null ? "'${_esc(resolvedFamily)}'" : null;
@@ -171,9 +174,8 @@ class TypographyGenerator implements ThemeGenerator {
         ];
         if (famLiteral != null) fields.add('fontFamily: $famLiteral');
 
-        if (fromToken &&
-            (rootFontsPackage?.isNotEmpty == true) &&
-            !_isSystemFont(resolvedFamily ?? '')) {
+        if ((rootFontsPackage?.isNotEmpty == true) &&
+            catalog.isBundled(resolvedFamily ?? '', token: fontToken?.trim())) {
           fields.add("package: '$rootFontsPackage'");
         }
 
@@ -227,12 +229,10 @@ class TypographyGenerator implements ThemeGenerator {
     Map<String, String> fonts,
     String? token,
     String? family,
-    void Function() markToken,
   ) {
     if (token != null &&
         token.trim().isNotEmpty &&
         fonts.containsKey(token.trim())) {
-      markToken();
       return fonts[token.trim()];
     }
     if (family != null && family.trim().isNotEmpty) {
@@ -330,19 +330,4 @@ class TypographyGenerator implements ThemeGenerator {
     'w800',
     'w900',
   };
-
-  // ✅ 系统字体判断（这些字体不需要 package）
-  bool _isSystemFont(String family) {
-    const systemFonts = {
-      'Roboto',
-      'SF Pro Text',
-      'SF Pro Display',
-      'Noto Sans',
-      'Noto Sans SC',
-      'Segoe UI',
-      'Helvetica',
-      'Arial',
-    };
-    return systemFonts.contains(family);
-  }
 }

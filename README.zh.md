@@ -20,7 +20,7 @@
 
 ```yaml
 dev_dependencies:
-  flex_theme_gen: ^1.0.8
+  flex_theme_gen: ^1.1.0
 ```
 
 安装依赖：
@@ -210,6 +210,68 @@ flutter:
 fonts:
   number: InterRes
 ```
+
+## 字体垂直度量（1.1.0）
+
+生成器只读取目标 package 的 `pubspec.yaml` 中**顶层 `flutter.fonts`**，忽略
+`flutter_gen` 等其他节点下的 `fonts`。从输出目录逐级向上寻找最近的
+`pubspec.yaml`；找不到时使用执行命令目录下的 pubspec。asset 路径相对于该
+pubspec 所在目录解析。同 family 有多个文件时，优先取第一个 weight 为 400、
+style 为 normal 的文件（省略时分别默认为 400 / normal），否则取第一个。
+同 family 重复声明时，采用第一组含 asset 的声明。
+
+保留字符串写法，同时支持显式 asset 或系统字体覆盖：
+
+```yaml
+fontsPackage: res
+fonts:
+  notoSansSC: Noto Sans SC
+  custom: {family: MyFont, asset: assets/fonts/MyFont.otf}
+  system: {family: Roboto, system: true}
+```
+
+显式 `asset` 优先于 pubspec 中选出的文件。family 有 asset 声明就是打包字体，
+设置了 `fontsPackage` 时带 package；未声明的 family 按系统字体处理，不带
+package。`system: true` 对该 Token 优先，即使 pubspec 已声明同名字体，也不带
+package、不生成度量。两个生成器共用此判断，**Noto Sans SC、Roboto 等名字不再
+被硬编码为系统字体**。文件缺失或损坏不会改变 package 判断，但不会生成其度量字段。
+
+项目存在打包字体 Token 时，`fonts.g.dart` 会追加：
+
+- `FontVerticalMetrics`：const 构造；字段包括 `unitsPerEm`、`ascent`、正数
+  `descent`、`lineGap`、保留符号的 `typoAscender` / `typoDescender` 和
+  `useTypoMetrics`（OS/2 fsSelection bit 7）。
+- `FontMetrics.<token>`：每个解析成功的打包字体一个 static const；系统字体没有字段。
+- `FontMetrics.of(String? family, {String? package})`：以 `FontFamilies` 的原始值
+  查找，null 或未知 family 返回 null；传入 package 时必须匹配 `FontPackages`，
+  省略则只按 family 查找。
+
+```dart
+final metrics = FontMetrics.of(
+  FontFamilies.notoSansSC,
+  package: FontPackages.notoSansSC,
+);
+final k = metrics?.opticalCenterOffset ?? 0.0;
+final dy = -k * fontSize; // 由使用方的 Text 组件做纯视觉平移。
+```
+
+偏移系数为
+`((ascent - descent) / 2 - (typoAscender + typoDescender) / 2) / unitsPerEm`。
+Noto Sans SC 的真实值 upem 1000、hhea 1160/−288、typo 880/−120 得到 **0.056**。
+`typoAscender - typoDescender <= 0` 时返回 0。缺少 OS/2 表时，typo 字段为 0、
+`useTypoMetrics` 为 false、偏移为 0，仍保留 hhea 度量。
+
+使用纯 Dart 按 tag 读取 sfnt 表目录及 `head`、`hhea`、`OS/2` 度量表头，包含
+有符号的 typo lineGap 和无符号的 Windows ascent/descent，不解析字形，不新增依赖。
+支持 `.ttf` / `.otf`，可变字体取**默认实例**。不支持 `.ttc` / `.woff` / `.woff2`；
+文件缺失、截断或损坏时输出包含路径及原因的警告，跳过该字体，其余输出继续生成。
+不处理非默认可变字体实例、字形边界或设备渲染验证。
+
+生成器不生成 Widget，也不向 TextStyle 添加 height 补偿。新增度量只追加到
+`fonts.g.dart`，其他文件仅在修正字体 package 时有预期变化。Token 顺序固定，
+没有生成时间戳。未声明打包字体 Token 的项目不生成度量 API；使用原系统字体名单内
+未声明 family 的旧项目保持逐字节一致。未声明的自定义 family 现在也不带 package，
+需要注册 asset 才会保留 package。旧版自定义模板目录无需添加新模板。
 
 ## 常见问题
 

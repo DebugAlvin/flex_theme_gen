@@ -1,0 +1,105 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ============================================================
+//  Tailwind-style alias extension
+//  Source: {{ source }}
+// ============================================================
+
+import 'package:flutter/material.dart';
+import 'tokens.g.dart';
+import 'app_colors.g.dart';
+
+extension twPaddingAliases on Widget {
+  /// padding: EdgeInsets.all(v)
+  Widget twP(double v) => Padding(padding: EdgeInsets.all(v), child: this);
+
+  /// x 方向 (horizontal)
+  Widget twPHx(double v) => Padding(padding: EdgeInsets.symmetric(horizontal: v), child: this);
+
+  /// y 方向 (vertical)
+  Widget twPVy(double v) => Padding(padding: EdgeInsets.symmetric(vertical: v), child: this);
+
+  
+  /// padding: EdgeInsets.all(Tokens.spacing4)
+  Widget twP4() => Padding(padding: EdgeInsets.all(Tokens.spacing4), child: this);
+
+  /// x方向 padding
+  Widget twPHx4() => Padding(padding: EdgeInsets.symmetric(horizontal: Tokens.spacing4), child: this);
+
+  /// y方向 padding
+  Widget twPVy4() => Padding(padding: EdgeInsets.symmetric(vertical: Tokens.spacing4), child: this);
+  
+}
+
+extension twRoundAliases on Widget {
+  /// 背景色
+  Widget twBg(Color color) => DecoratedBox(
+        decoration: BoxDecoration(color: color),
+        child: this,
+      );
+
+  /// 全圆角
+  Widget twRoundedFull() => ClipRRect(
+        borderRadius: BorderRadius.circular(9999),
+        child: this,
+      );
+
+  
+  /// 裁剪圆角 Tokens.radius4
+  Widget twRounded4() => ClipRRect(
+        borderRadius: BorderRadius.circular(Tokens.radius4),
+        child: this,
+      );
+
+  /// 非裁剪圆角 Tokens.radius4
+  Widget twRadius4() => DecoratedBox(
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(Tokens.radius4)),
+        child: this,
+      );
+  
+
+  // ---------------- Border ----------------
+  /// 默认边框（使用 Tokens.borderDefaultWidth）
+  Widget twBorder({Color? color, double? width, double? radius}) =>
+      _twBuildBorder(this, width ?? Tokens.borderDefaultWidth, color, radius);
+
+  
+
+ // ============================================================
+ //  辅助函数
+ // ============================================================
+
+ double _twDetectRadius(Widget widget) {
+   if (widget is ClipRRect) {
+     return widget.borderRadius is BorderRadius
+         ? (widget.borderRadius as BorderRadius).topLeft.x
+         : 0;
+   }
+   if (widget is DecoratedBox) {
+     final deco = widget.decoration;
+     if (deco is BoxDecoration && deco.borderRadius is BorderRadius) {
+       final br = deco.borderRadius as BorderRadius;
+       return br.topLeft.x;
+     }
+   }
+   return 0;
+ }
+
+ Widget _twBuildBorder(Widget child, double width, Color? color, double? radius) {
+   return Builder(
+     builder: (context) {
+       final isDark = Theme.of(context).brightness == Brightness.dark;
+       final colors = isDark ? AppColors.dark() : AppColors.light();
+       final Color resolvedColor = color ?? const Color(0xFFCCCCCC);
+       final double effectiveRadius = radius ?? _twDetectRadius(child);
+
+       return DecoratedBox(
+         decoration: BoxDecoration(
+           border: Border.all(color: resolvedColor, width: width),
+           borderRadius: BorderRadius.circular(effectiveRadius),
+         ),
+         child: child,
+       );
+     },
+   );
+ }
+}

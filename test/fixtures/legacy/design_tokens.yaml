@@ -1,0 +1,23 @@
+fontsPackage: res
+fonts:
+  notoSansSC: Noto Sans SC
+  roboto: Roboto
+  helvetica: Helvetica
+colors:
+  light: {primary: FF123456}
+  dark: {primary: FF654321}
+tokens:
+  spacing: {4: 4}
+  radius: {4: 4}
+typography:
+  body:
+    fontFamilyToken: notoSansSC
+    sizes:
+      regular: {fontSize: 15, fontWeight: 400, lineHeight: 20}
+  label:
+    fontFamilyToken: roboto
+    size: 11
+    weight: 400
+  direct:
+    fontFamily: Helvetica
+    size: 12

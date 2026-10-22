@@ -10,6 +10,7 @@ import 'core/tokens_generator.dart';
 import 'core/typography_generator.dart';
 import 'utils/yaml_util.dart';
 import 'core/base.dart';
+import 'fonts/font_declarations.dart';
 
 typedef Logger = void Function(String message);
 
@@ -60,12 +61,14 @@ Future<void> runGenerateThemeTokens({
     try {
       final root = await _loadDesignTokens(paths.inputPath);
 
+      final fonts = FontDeclarations.load(root, paths, log);
+
       // 这里按依赖拓扑排序：Colors -> Tokens -> Fonts -> Typography
       final generators = <ThemeGenerator>[
         ColorsGenerator(),
         TokensGenerator(),
-        FontsGenerator(),
-        TypographyGenerator(),
+        FontsGenerator(declarations: fonts),
+        TypographyGenerator(declarations: fonts),
       ];
 
       log('▶️ Generating theme tokens...');
@@ -99,7 +102,8 @@ Future<void> runGenerateThemeTokens({
     DateTime lastTick = DateTime.fromMillisecondsSinceEpoch(0);
     const debounce = Duration(milliseconds: 500);
 
-    final sub = file.watch(events: FileSystemEvent.modify).listen((event) async {
+    final sub =
+        file.watch(events: FileSystemEvent.modify).listen((event) async {
       final now = DateTime.now();
       if (now.difference(lastTick) < debounce) return; // 防抖
       lastTick = now;
