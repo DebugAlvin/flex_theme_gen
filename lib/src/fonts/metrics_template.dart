@@ -1,6 +1,7 @@
 // Kept in Dart so existing custom template directories remain compatible.
 const fontMetricsTemplate = r'''
 
+
 /// Vertical font header metrics in font units (default variable-font instance).
 class FontVerticalMetrics {
   final int unitsPerEm;
@@ -35,9 +36,24 @@ class FontVerticalMetrics {
 class FontMetrics {
 {{metrics}}
 
-  /// Looks up a raw FontFamilies value. An optional package must match.
+  /// Looks up a FontFamilies or TextStyle.fontFamily value.
+  /// An optional package must match, including any packages/ prefix.
   static FontVerticalMetrics? of(String? family, {String? package}) {
-    if (family == null) return null;
+    if (family == null) {
+      return null;
+    }
+    if (family.startsWith('packages/')) {
+      final separator = family.indexOf('/', 9);
+      if (separator <= 9 || separator == family.length - 1) {
+        return null;
+      }
+      final prefixedPackage = family.substring(9, separator);
+      if (package != null && package != prefixedPackage) {
+        return null;
+      }
+      package = prefixedPackage;
+      family = family.substring(separator + 1);
+    }
 {{lookups}}
     return null;
   }

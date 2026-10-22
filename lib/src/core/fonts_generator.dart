@@ -111,7 +111,9 @@ class FontsGenerator implements ThemeGenerator {
     useTypoMetrics: ${value.useTypoMetrics},
   );''');
       lookups.writeln('''    if (family == FontFamilies.$key &&
-        (package == null || package == FontPackages.$key)) return $key;''');
+        (package == null || package == FontPackages.$key)) {
+      return $key;
+    }''');
     }
     return renderTemplate(fontMetricsTemplate, {
       'metrics': metrics.toString().trimRight(),

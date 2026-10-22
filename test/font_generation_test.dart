@@ -148,6 +148,49 @@ void main() {
     expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
   });
 
+  test('generated lookup accepts TextStyle package-prefixed families',
+      () async {
+    write('config/design_tokens.yaml', '''fontsPackage: res
+fonts:
+  notoSansSC: {family: NotoSansSC, asset: assets/regular.ttf}
+''');
+    await generate();
+    final generated = output('fonts.g.dart')
+        .replaceAll("import 'package:flutter/material.dart';", '');
+    write('prefix_check.dart', '''
+$generated
+void check(bool value, String name) {
+  if (!value) throw StateError('prefix check failed: ' + name);
+}
+void main() {
+  const metrics = FontMetrics.notoSansSC;
+  check(identical(FontMetrics.of('packages/res/NotoSansSC'), metrics), 'prefixed');
+  check(identical(FontMetrics.of('packages/res/NotoSansSC', package: 'res'), metrics), 'matching package');
+  check(FontMetrics.of('packages/other/NotoSansSC') == null, 'wrong prefix');
+  check(FontMetrics.of('packages/res/NotoSansSC', package: 'other') == null, 'conflicting package');
+  check(identical(FontMetrics.of('NotoSansSC', package: 'res'), metrics), 'raw with package');
+  check(identical(FontMetrics.of('NotoSansSC'), metrics), 'raw');
+  for (final family in ['packages/', 'packages/res', 'packages//X',
+      'packages/res/', 'packages//', 'packages/res/Unknown']) {
+    check(FontMetrics.of(family) == null, family);
+  }
+}
+''');
+    final result = await Process.run(Platform.resolvedExecutable,
+        [p.join(project.path, 'prefix_check.dart')]);
+    expect(result.exitCode, 0, reason: '${result.stdout}\n${result.stderr}');
+  });
+
+  test('metrics classes have separation and formatted lookup blocks', () async {
+    await generate();
+    final fonts = output('fonts.g.dart');
+    expect(fonts, contains('}\n\n/// Vertical font header metrics'));
+    expect(fonts, contains('''    if (family == FontFamilies.notoSansSC &&
+        (package == null || package == FontPackages.notoSansSC)) {
+      return notoSansSC;
+    }'''));
+  });
+
   test('repeated generation is byte identical for every output', () async {
     await generate();
     final before = {
@@ -194,7 +237,8 @@ void main() {
     expect(output('fonts.g.dart'), contains('class FontMetrics'));
   });
 
-  test('legacy outputs match unmodified 1.0.8 snapshots', () async {
+  test('legacy outputs only change Source headers from 1.0.8 snapshots',
+      () async {
     paths = Paths(
       inputPath: 'test/fixtures/legacy/design_tokens.yaml',
       outDir: paths.outDir,
@@ -207,8 +251,11 @@ void main() {
     for (final snapshot in Directory('test/fixtures/snapshots/legacy')
         .listSync()
         .whereType<File>()) {
-      expect(output(p.basename(snapshot.path).replaceAll('.golden', '.dart')),
-          snapshot.readAsStringSync(),
+      expect(
+          output(p.basename(snapshot.path).replaceAll('.golden', '.dart')),
+          snapshot
+              .readAsStringSync()
+              .replaceAll('{{ source }}', paths.inputPath),
           reason: snapshot.path);
     }
   });

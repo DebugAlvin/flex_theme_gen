@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1
+- Accept Flutter's `packages/<package>/<family>` form in `FontMetrics.of`, so consumers can pass `TextStyle.fontFamily` directly. Prefix and explicit package must agree; missing package/family returns null. Raw-family lookup remains unchanged.
+- Fix all generated `Source` headers, including whitespace-padded `{{ source }}` placeholders in existing custom templates. Input paths are rendered relative to the generation working directory, with no timestamps; absolute and equivalent relative inputs produce identical output. Added snapshots covering all seven generated headers.
+- Add a blank line between `FontPackages` and `FontVerticalMetrics` and emit `FontMetrics.of` conditionals in Dart formatter style.
+- Upgrading from 1.1.0 preserves font families/packages, metric values, typography and all other generated content apart from the corrected `Source` lines and the font metrics formatting above; only the `FontMetrics.of` implementation gains the prefix handling described above.
+
 ## 1.1.0
 - Added deterministic `FontVerticalMetrics` / `FontMetrics` output in `fonts.g.dart` for declared font assets, including optical center offsets for visual alignment by consumers. No Widgets or TextStyle height compensation are generated.
 - Read TrueType/OpenType headers (including variable fonts at their default instance) in pure Dart without new dependencies. Missing, malformed, TTC and WOFF/WOFF2 assets produce path-specific warnings and are skipped without stopping generation.

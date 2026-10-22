@@ -52,7 +52,14 @@ String renderTemplate(String tpl, Map<String, dynamic> ctx) {
 
   // ---------- 3️⃣ 简单变量替换 ----------
   ctx.forEach((k, v) {
-    out = out.replaceAll('{{$k}}', v.toString());
+    if (k == 'source' && v is String) {
+      // Support both built-in and existing custom templates. Keep headers
+      // relative to the generation working directory, even for absolute input.
+      final source = p.relative(v).replaceAll(p.separator, '/');
+      out = out.replaceAll(RegExp(r'{{\s*source\s*}}'), source);
+    } else {
+      out = out.replaceAll('{{$k}}', v.toString());
+    }
   });
 
   return out;
@@ -61,8 +68,5 @@ String renderTemplate(String tpl, Map<String, dynamic> ctx) {
 /// 缩进多行文本
 String indent(String text, int spaces) {
   final pad = ' ' * spaces;
-  return text
-      .split('\n')
-      .map((l) => l.isEmpty ? l : '$pad$l')
-      .join('\n');
+  return text.split('\n').map((l) => l.isEmpty ? l : '$pad$l').join('\n');
 }

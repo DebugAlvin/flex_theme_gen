@@ -28,7 +28,7 @@ Add to your `dev_dependencies`:
 
 ```yaml
 dev_dependencies:
-  flex_theme_gen: ^1.1.0
+  flex_theme_gen: ^1.1.1
 ```
 
 Then activate globally (optional):
@@ -191,6 +191,9 @@ For projects with bundled font tokens, `fonts.g.dart` appends:
 - `FontMetrics.of(String? family, {String? package})`, which looks up the raw
   `FontFamilies` value. Null/unknown families return null; when supplied, package
   must match `FontPackages`. When omitted, lookup is by family alone.
+  You can pass `TextStyle.fontFamily` directly, including Flutter's
+  `packages/<package>/<family>` prefix. Conflicting explicit packages and
+  prefixes with a missing package or family return null.
 
 ```dart
 final metrics = FontMetrics.of(

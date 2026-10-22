@@ -20,7 +20,7 @@
 
 ```yaml
 dev_dependencies:
-  flex_theme_gen: ^1.1.0
+  flex_theme_gen: ^1.1.1
 ```
 
 安装依赖：
@@ -244,7 +244,9 @@ package、不生成度量。两个生成器共用此判断，**Noto Sans SC、Ro
 - `FontMetrics.<token>`：每个解析成功的打包字体一个 static const；系统字体没有字段。
 - `FontMetrics.of(String? family, {String? package})`：以 `FontFamilies` 的原始值
   查找，null 或未知 family 返回 null；传入 package 时必须匹配 `FontPackages`，
-  省略则只按 family 查找。
+  省略则只按 family 查找。可以直接传 `TextStyle.fontFamily`，支持 Flutter 的
+  `packages/<package>/<family>` 前缀；显式 package 冲突，或前缀缺少 package / family
+  时返回 null。
 
 ```dart
 final metrics = FontMetrics.of(
